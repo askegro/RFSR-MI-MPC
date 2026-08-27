@@ -1,0 +1,622 @@
+##############################################################################
+###  RFSR-MI-MPC -- reproduction of the manuscript results
+###  generated 27-Aug-2026 17:03:46
+###
+###  Organised by manuscript subsection. Each part carries the table(s)
+###  of that subsection followed by the numbers quoted in its running text.
+##############################################################################
+
+==============================================================================
+  SECTION V -- EVALUATION METHODOLOGY (inputs to the results)
+==============================================================================
+
+  Table I -- Nominal Evaluation Parameters.
+  ----------------------------------------------------------------------------
+==========================================================================
+N                          20                 N_p                        10                
+Delta t [s]                1                  Demand                     Scaled WLTC Class 3
+(w_SOH,w_SOC,w_lambda)     (10,4,1000)        t_lim^op [s]               1                 
+Relative MIP-gap tolerance 1e-04              CPU                        i7-1370P (13th Gen)  [hardware; not code-derived]
+v_cell [V]                 [2.00, 3.60]       v_pack [V]                 [44.8, 72.0]      
+i_pack [A]                 [-3.0, 18.0]       SOC_cell [-]               [0.05, 1.00]      
+T_cell [C]                 [11, 44]           SOH^EOL [-]                0.80              
+delta_P [-]                0.01               (Delta_low,Delta_high)     (0.03,0.06)       
+(z1,z2)                    (0.25,0.40)        sigma_Delta [p.u./s]       0.005             
+SOC_i(0)                   N(0.8,0.001^2)     SOH_i(0)                   N(0.98,0.01^2)    
+T_i(0) [C]                 25                 i_RC,i(0) [A]              0                 
+kappa_WLTC [-]             0.008122                                                        
+==========================================================================
+
+  Table II -- Initial-Dispersion Parameters for the Heterogeneity/Demand Sweep.
+  ----------------------------------------------------------------------------
+====================================================
+Case          sigma_SOC,0 [%]  sigma_SOH,0 [%]         Demand
+----------------------------------------------------
+WLTC Low                 0.05              0.5           WLTC
+WLTC Med                 0.10              1.0           WLTC
+WLTC High                1.00              1.5           WLTC
+High Power               0.10              0.5   200 W const.
+====================================================
+
+  In-text numbers
+  ----------------------------------------------------------------------------
+Section V -- Evaluation Methodology (inputs quoted in the text)
+==============================================================================
+  source: C:\Users\skegro\Documents\C2_IEEE-TCST_Code_20260528\results\Results_nominal_wltc_20260617.mat
+
+  -- V-A  Nominal driving-cycle evaluation
+  ----------------------------------------------------------------------------
+    Active control steps |K_act| (nominal WLTC)                    1800
+    Total simulation steps                                         1800
+    Sampling interval Delta t [s]                                 1.000
+    Cells in series N                                                20
+    Prediction horizon N_p                                           10
+    Maximum discharge request [W]                               443.963
+    Maximum discharge request [kW]                                0.444
+    Maximum regen-charge magnitude [W]                          192.000
+    Maximum regen-charge magnitude [kW]                           0.192
+
+  -- V-E  Pack-size sweep: rescaled peak demand
+  ----------------------------------------------------------------------------
+    N = 16 : peak discharge request [W]                           355.2
+    N = 20 : peak discharge request [W]                           444.0
+    N = 24 : peak discharge request [W]                           532.8
+
+  -- V-E  Monte Carlo design
+  ----------------------------------------------------------------------------
+    Paired realizations N_MC                                         20
+    Bootstrap resamples B                                         10000
+    Bootstrap CI level [%]                                         95.0
+
+==============================================================================
+  SECTION VI-A.1 -- SOLVER CERTIFICATION AND RUNTIME
+==============================================================================
+
+  Table III -- Solver-Time And Branch-and-Bound Statistics For The Nominal WLTC Cycle.
+  ----------------------------------------------------------------------------
+==================================================================
+Controller t_50[ms] t_95[ms] t_max[ms]  Root[%]  n^node_50  n^node_95 n^node_max
+------------------------------------------------------------------
+Baseline      310.5   1012.0   1289.0     85.0          1        289       1089
+Proposed      106.0    148.0    211.0    100.0          1          1          1
+------------------------------------------------------------------
+Speedup        2.9x     6.8x     6.1x       --         --         --         --
+==================================================================
+
+  In-text numbers
+  ----------------------------------------------------------------------------
+Section VI-A.1 -- Solver Certification and Runtime
+==============================================================================
+  source: C:\Users\skegro\Documents\C2_IEEE-TCST_Code_20260528\results\Results_nominal_wltc_20260617.mat
+
+  -- Certification
+  ----------------------------------------------------------------------------
+    Baseline eta_opt [%]                                          77.61
+    Proposed eta_opt [%]                                         100.00
+    Baseline NOT certified, share of K_act [%]                    22.39
+    Baseline TO+Inc. steps                                          403
+    Baseline Fail steps                                               0
+    Proposed Fail steps                                               0
+    |K_act|                                                        1800
+
+  -- Solver time over K_act
+  ----------------------------------------------------------------------------
+    Baseline t_50 / t_95 / t_max [ms]                             310.5   1012.0   1289.0
+    Proposed t_50 / t_95 / t_max [ms]                             106.0    148.0    211.0
+    Speedup t_50  (Baseline/Proposed) [x]                           2.9
+    Speedup t_95  (Baseline/Proposed) [x]                           6.8
+    Speedup t_max (Baseline/Proposed) [x]                           6.1
+
+  -- Branch-and-bound nodes over K_act
+  ----------------------------------------------------------------------------
+    Baseline root-node share [%]                                   85.0
+    Proposed root-node share [%]                                  100.0
+    Baseline n^node_95                                              289
+    Baseline n^node_max                                            1089
+    Proposed n^node_max                                               1
+
+  -- Baseline timeout-incumbent quality
+  ----------------------------------------------------------------------------
+    TO+Inc. steps with a finite gap                                 403
+    Median incumbent MIP gap [%]                                  1.230
+    Maximum incumbent MIP gap [%]                                29.848
+    Share of gaps below 1% [%]                                     41.2
+
+  -- Difficulty vs. requested power (baseline)
+  ----------------------------------------------------------------------------
+    Optimal                  mean     52.4 W   median     32.6 W
+    TO+Inc.                  mean    163.1 W   median    165.3 W
+    Fail                                -            -
+
+  -- Persistence of non-certified baseline steps
+  ----------------------------------------------------------------------------
+    Total maximal non-certified bursts                               30
+    Bursts >= 5 consecutive active steps                             23
+    Longest burst [active steps]                                     64
+    Lag-1 autocorrelation of p_req                                0.954
+    Lag-1 autocorrelation of |p_req|                              0.939
+    Median max per-cell dSOC per step [pp]                       0.0103
+
+  -- Proposed-controller online cost
+  ----------------------------------------------------------------------------
+    Sampling period Delta t [ms]                                   1000
+    Ranking + sort + parameter build, p95 [ms]                     0.57
+       as share of Delta t [%]                                    0.057
+    Ranking + sort + parameter build, max [ms]                     1.19
+       as share of Delta t [%]                                    0.119
+    Total control update, p95 [ms]                               399.70
+       as share of Delta t [%]                                     40.0
+    Total control update, max [ms]                               509.29
+       as share of Delta t [%]                                     50.9
+
+==============================================================================
+  SECTION VI-A.2 -- SAME-STATE APPROXIMATION COST
+==============================================================================
+
+  Table IV -- Same-State Approximation Cost on Jointly Certified, Uncurtailed Steps K_pair.
+  ----------------------------------------------------------------------------
+==================================================================
+Metric                          Proposed-controller      Rule-based-driver
+                                         trajectory             trajectory
+------------------------------------------------------------------
+|K_pair| (of |K_act|)                      1649/1800               1650/1800
+Delta J_obj^SS                               0.0059                 0.0032
+Delta J_SOH,w^SS                            +0.0068                +0.0034
+Delta J_SOC,w^SS                            -0.0009                -0.0002
+Delta J_lambda,w^SS                          0.0000                 0.0000  (expect 0: K_pair excludes curtailed steps)
+g_rel_bar [%]                                 0.102                  0.056
+g_rel_50 [%]                                  0.000                  0.000
+g_rel_95 [%]                                  0.629                  0.259
+g_rel_max [%]                                 0.948                  0.458
+==================================================================
+
+  In-text numbers
+  ----------------------------------------------------------------------------
+Section VI-A.2 -- Same-State Approximation Cost
+==============================================================================
+
+  -- Proposed-controller trajectory (D vs A_ref at the same pre-control state)
+  ----------------------------------------------------------------------------
+  source: C:\Users\skegro\Documents\C2_IEEE-TCST_Code_20260528\results\Results_samestate_proposed_20260617.mat
+    |K_act| (active states on this trajectory)                     1800
+    |K_pair| (jointly certified and uncurtailed)                   1649
+    Full subset-selection reference solves NOT certified            151
+    note:   (i.e. 151 of the 1800 active states, even at the 100 s reference limit)
+    Mean   restriction gap g_rel_bar [%]                          0.102
+    Median restriction gap g_rel_50  [%]                          0.000
+    95th   restriction gap g_rel_95  [%]                          0.629
+    Max    restriction gap g_rel_max [%]                          0.948
+    Steps with g_rel exactly zero                                     7
+       as share of K_pair [%]                                       0.4
+    Steps with g_rel > 0 (genuine restriction cost)                 865
+    Steps with g_rel < 0 (sign not resolvable)                      777
+    Min    restriction gap g_rel_min [%]                        -0.0099
+    5th    restriction gap g_rel_05  [%]                        -0.0085
+    Most negative gap [%]                                       -0.0099
+    Median of the negative gaps [%]                             -0.0000
+    Relative MIP-gap tolerance in g_rel units [%]                0.0100
+    Negative gaps beyond 1x the tolerance                             0
+    Negative gaps beyond 2x the tolerance                             0
+    Share of |g_rel| within 2x the tolerance [%]                   73.4
+    Mean Delta J_lambda,w^SS (expect exactly 0)                  0.000000
+
+  -- Rule-based-driver trajectory (D_ref vs A_ref at the same pre-control state)
+  ----------------------------------------------------------------------------
+  source: C:\Users\skegro\Documents\C2_IEEE-TCST_Code_20260528\results\Results_samestate_rulebased_20260617.mat
+    |K_act| (active states on this trajectory)                     1800
+    |K_pair| (jointly certified and uncurtailed)                   1650
+    Full subset-selection reference solves NOT certified            150
+    note:   (i.e. 150 of the 1800 active states, even at the 100 s reference limit)
+    Mean   restriction gap g_rel_bar [%]                          0.056
+    Median restriction gap g_rel_50  [%]                          0.000
+    95th   restriction gap g_rel_95  [%]                          0.259
+    Max    restriction gap g_rel_max [%]                          0.458
+    Steps with g_rel exactly zero                                     2
+       as share of K_pair [%]                                       0.1
+    Steps with g_rel > 0 (genuine restriction cost)                1093
+    Steps with g_rel < 0 (sign not resolvable)                      555
+    Min    restriction gap g_rel_min [%]                        -0.0099
+    5th    restriction gap g_rel_05  [%]                        -0.0064
+    Most negative gap [%]                                       -0.0099
+    Median of the negative gaps [%]                             -0.0000
+    Relative MIP-gap tolerance in g_rel units [%]                0.0100
+    Negative gaps beyond 1x the tolerance                             0
+    Negative gaps beyond 2x the tolerance                             0
+    Share of |g_rel| within 2x the tolerance [%]                   58.4
+    Mean Delta J_lambda,w^SS (expect exactly 0)                  0.000000
+
+==============================================================================
+  SECTION VI-A.3 -- CLOSED-LOOP CONTROL PERFORMANCE
+==============================================================================
+
+  Table V -- Closed-Loop Performance Over The Nominal WLTC Cycle.
+  ----------------------------------------------------------------------------
+==================================================================
+Metric                     Baseline   Proposed
+------------------------------------------------------------------
+Closed-loop online objective
+J_obj^CL [-]                 5.8521     5.7704
+J_SOH,w^CL [-]               5.7656     5.7627
+J_SOC,w^CL [-]               0.0837     0.0077
+J_lambda,w^CL [-]            0.0029     0.0000
+------------------------------------------------------------------
+Curtailment
+Phi_curt [%]                  0.278      0.000
+------------------------------------------------------------------
+Cell-to-cell SOC regulation
+sigma_SOC_bar [%]            0.8099     0.2403
+sigma_SOC_95 [%]             1.2578     0.4322
+sigma_SOC_max [%]            1.3702     0.5150
+------------------------------------------------------------------
+Power-tracking error
+e_50 [%]                     0.0154     0.0157
+e_99 [%]                     0.0291     0.0288
+e_max [%]                    1.0043     0.0421
+------------------------------------------------------------------
+Cell usage and switching
+phi_eng_bar [-]               0.708      0.707
+n_sw_bar [-]                   1.81       2.68
+n_sw_95 [-]                      10         11
+==================================================================
+
+  In-text numbers
+  ----------------------------------------------------------------------------
+Section VI-A.3 -- Closed-Loop Control Performance
+==============================================================================
+  source: C:\Users\skegro\Documents\C2_IEEE-TCST_Code_20260528\results\Results_nominal_wltc_20260617.mat
+
+  -- Cell-to-cell SOC dispersion and its reduction factors
+  ----------------------------------------------------------------------------
+    cycle-mean sigma_SOC [%]                     0.8099 ->     0.2403   factor    3.4x
+    95th pct  sigma_SOC [%]                      1.2578 ->     0.4322   factor    2.9x
+    maximum   sigma_SOC [%]                      1.3702 ->     0.5150   factor    2.7x
+
+  -- SOH-weighted closed-loop objective contribution
+  ----------------------------------------------------------------------------
+    Baseline J_SOH,w^CL                                            5.7656
+    Proposed J_SOH,w^CL                                            5.7627
+    Relative change (Prop vs Base) [%]                             -0.050
+
+  -- Power-tracking error
+  ----------------------------------------------------------------------------
+    Baseline  e_50  [%]                                            0.0154
+    Baseline  e_99  [%]                                            0.0291
+    Baseline  e_max [%]                                            1.0043
+    Proposed  e_50  [%]                                            0.0157
+    Proposed  e_99  [%]                                            0.0288
+    Proposed  e_max [%]                                            0.0421
+
+  -- Curtailment
+  ----------------------------------------------------------------------------
+    Baseline  detected curtailment steps                              5
+    Baseline  Phi_curt [%]                                          0.278
+    Proposed  detected curtailment steps                              0
+    Proposed  Phi_curt [%]                                          0.000
+
+  -- Cell utilization and switching activity
+  ----------------------------------------------------------------------------
+    Baseline phi_eng_bar                                            0.708
+    Proposed phi_eng_bar                                            0.707
+    Baseline n_sw_bar [cells]                                        1.81
+    Proposed n_sw_bar [cells]                                        2.68
+    Change in n_sw_bar [%]                                          +47.9
+    Baseline n_sw_95 [cells]                                         10
+    Proposed n_sw_95 [cells]                                         11
+
+  -- Cell temperature and thermal-constraint activity (nominal WLTC)
+  ----------------------------------------------------------------------------
+    T_cell lower limit [degC]                                       11.00
+    T_cell upper limit [degC]                                       44.00
+    Baseline  min cell temperature [degC]                           25.00
+    Baseline  max cell temperature [degC]                           25.41
+    Baseline  margin to T_cell^max [K]                              18.59
+    Baseline  margin to T_cell^min [K]                              14.00
+    Baseline  steps with a cell within 0.1 K of a limit               0
+    Proposed  min cell temperature [degC]                           25.00
+    Proposed  max cell temperature [degC]                           25.35
+    Proposed  margin to T_cell^max [K]                              18.65
+    Proposed  margin to T_cell^min [K]                              14.00
+    Proposed  steps with a cell within 0.1 K of a limit               0
+
+  -- Cell temperature pooled over all reported result files
+  ----------------------------------------------------------------------------
+    Result files scanned                                              5
+    Temperature trajectories scanned                                 62
+    Pooled min cell temperature [degC]                              25.00
+    Pooled max cell temperature [degC]                              25.41
+    Pooled margin to T_cell^max [K]                                 18.59
+    Pooled margin to T_cell^min [K]                                 14.00
+
+==============================================================================
+  SECTION VI-B.1 -- SENSITIVITY TO INITIAL CONDITIONS
+==============================================================================
+
+  Table VI -- Paired Monte Carlo Results Over 20 Initial-Condition Realizations.
+  ----------------------------------------------------------------------------
+==================================================================
+  Bootstrap: B = 10000, CI level = 95.0%
+  Baseline/Proposed: medians across realisations. Mean paired difference and CI: paired D-A bootstrap.
+Metric                 Baseline   Proposed Mean pair. diff.  95% bootstrap CI
+------------------------------------------------------------------
+e_bar [%]                 0.404      0.015         -0.343  [-0.393, -0.293]
+sigma_SOC_bar [%]         0.769      0.213         -0.546  [-0.565, -0.525]
+t_95 [ms]                1002.0      117.7         -883.7  [-885.3, -881.6]
+eta_opt [%]                76.2      100.0          +24.0  [+23.5, +24.7]
+==================================================================
+
+  In-text numbers: do all 95% bootstrap CIs exclude zero?
+  ----------------------------------------------------------------------------
+Section VI-B.1 -- do the 95% bootstrap CIs exclude zero?
+==============================================================================
+    Metric                       Mean D-A           95% bootstrap CI    Excl. 0
+    --------------------------------------------------------------------------
+    e_bar [%]                      -0.343   [    -0.393,     -0.293]        yes
+    sigma_SOC_bar [%]              -0.546   [    -0.565,     -0.525]        yes
+    t_95 [ms]                      -883.7   [    -885.3,     -881.6]        yes
+    eta_opt [pp]                  +24.017   [   +23.533,    +24.694]        yes
+    --------------------------------------------------------------------------
+    All four CIs exclude zero                                       yes
+    Realizations N_MC                                                20
+    Bootstrap resamples B                                         10000
+
+  In-text numbers: design parameters
+  ----------------------------------------------------------------------------
+Section VI-B.1 -- Sensitivity to Initial Conditions
+==============================================================================
+  source: C:\Users\skegro\Documents\C2_IEEE-TCST_Code_20260528\results\Results_montecarlo_ics_20260617.mat
+    Paired realizations N_MC                                         20
+    Bootstrap resamples B                                         10000
+    Bootstrap CI level [%]                                         95.0
+
+==============================================================================
+  SECTION VI-B.2 -- SENSITIVITY TO CELL HETEROGENEITY AND DEMAND
+==============================================================================
+
+  Table VII -- Robustness Results For Heterogeneity, Demand, Pack-Size, and Prediction-Horizon Variations.
+  ----------------------------------------------------------------------------
+==============================================================================
+Sweep      Cond.      Ctrl.   e_bar [%]  Phi_curt [%]  sigma_SOC_bar [%]  t_95 [ms] eta_opt [%]
+------------------------------------------------------------------------------
+-- Heterog./demand --
+Het/dem    WLTC_Low   Base        0.186         0.167              0.469     1002.0        77.1
+Het/dem    WLTC_Low   Prop        0.018         0.000              0.127      119.0       100.0
+Het/dem    WLTC_Med   Base        0.186         0.222              0.823     1002.0        76.2
+Het/dem    WLTC_Med   Prop        0.018         0.000              0.240      117.0       100.0
+Het/dem    WLTC_High  Base        1.630         0.222              1.252     1002.0        73.9
+Het/dem    WLTC_High  Prop        0.018         0.000              0.548      114.0       100.0
+Het/dem    HighPower  Base        0.348         0.000              0.349     1007.0        26.8
+Het/dem    HighPower  Prop        0.013         0.000              0.097      135.5       100.0
+------------------------------------------------------------------------------
+-- Pack size --
+Pack size  N=16       Base        0.023         0.056              0.735     1001.0        60.1
+Pack size  N=16       Prop        0.023         0.000              0.224       96.0       100.0
+Pack size  N=20       Base        0.186         0.222              0.823     1002.0        76.2
+Pack size  N=20       Prop        0.018         0.000              0.240      117.0       100.0
+Pack size  N=24       Base        0.021         0.000              0.858     1008.0        75.3
+Pack size  N=24       Prop        0.022         0.000              0.221      137.0       100.0
+------------------------------------------------------------------------------
+-- Horizon --
+Horizon    Np=4       Base        0.017         0.000              1.388     1000.0        85.9
+Horizon    Np=4       Prop        0.018         0.000              0.240       40.0       100.0
+Horizon    Np=6       Base        0.129         0.111              1.171     1001.0        84.3
+Horizon    Np=6       Prop        0.018         0.000              0.240       61.0       100.0
+Horizon    Np=8       Base        0.129         0.222              0.983     1001.0        81.7
+Horizon    Np=8       Prop        0.018         0.000              0.240       93.0       100.0
+Horizon    Np=10      Base        0.186         0.222              0.823     1002.0        76.2
+Horizon    Np=10      Prop        0.018         0.000              0.240      117.0       100.0
+==============================================================================
+
+  In-text numbers
+  ----------------------------------------------------------------------------
+Section VI-B.2 -- Sensitivity to Cell Heterogeneity and Demand
+==============================================================================
+  source: C:\Users\skegro\Documents\C2_IEEE-TCST_Code_20260528\results\Results_robustness_sweeps_20260617.mat
+
+  -- Per-case metrics (N = 20, N_p = 10)
+  ----------------------------------------------------------------------------
+    Cond.        Ctrl.   e_bar [%]  Phi_curt[%]   sigma_SOC[%]   t_95[ms] eta_opt[%]
+    ------------------------------------------------------------------------------
+    WLTC_Low     Baseline      0.186        0.167          0.469     1002.0       77.1
+    WLTC_Low     Proposed      0.018        0.000          0.127      119.0      100.0
+    WLTC_Med     Baseline      0.186        0.222          0.823     1002.0       76.2
+    WLTC_Med     Proposed      0.018        0.000          0.240      117.0      100.0
+    WLTC_High    Baseline      1.630        0.222          1.252     1002.0       73.9
+    WLTC_High    Proposed      0.018        0.000          0.548      114.0      100.0
+    HighPower    Baseline      0.348        0.000          0.349     1007.0       26.8
+    HighPower    Proposed      0.013        0.000          0.097      135.5      100.0
+
+  -- Active-step counts per case (K_act)
+  ----------------------------------------------------------------------------
+    WLTC_Low     |K_act|                                           1800
+    WLTC_Med     |K_act|                                           1800
+    WLTC_High    |K_act|                                           1800
+    HighPower    |K_act|                                            600
+
+  -- High Power case (constant 200 W discharge)
+  ----------------------------------------------------------------------------
+    Baseline eta_opt [%]                                           26.8
+    Proposed eta_opt [%]                                          100.0
+    Baseline sigma_SOC_bar [%]                                    0.349
+    Proposed sigma_SOC_bar [%]                                    0.097
+    Reduction factor [x]                                            3.6
+
+  -- Effect of increasing initial dispersion (WLTC cases)
+  ----------------------------------------------------------------------------
+    Baseline  sigma_SOC_bar, Low -> High [%]                      0.469
+       -> High [%]                                                1.252
+    Proposed  sigma_SOC_bar, Low -> High [%]                      0.127
+       -> High [%]                                                0.548
+
+==============================================================================
+  SECTION VI-B.3 -- SENSITIVITY TO PACK SIZE
+==============================================================================
+
+  In-text numbers (table rows are in Table VII above)
+  ----------------------------------------------------------------------------
+Section VI-B.3 -- Sensitivity to Pack Size
+==============================================================================
+  source: C:\Users\skegro\Documents\C2_IEEE-TCST_Code_20260528\results\Results_robustness_sweeps_20260617.mat
+
+  -- Per-pack-size metrics (N_p = 10, WLTC Med)
+  ----------------------------------------------------------------------------
+    Cond.        Ctrl.   e_bar [%]  Phi_curt[%]   sigma_SOC[%]   t_95[ms] eta_opt[%]
+    ------------------------------------------------------------------------------
+    N=16         Baseline      0.023        0.056          0.735     1001.0       60.1
+    N=16         Proposed      0.023        0.000          0.224       96.0      100.0
+    N=20         Baseline      0.186        0.222          0.823     1002.0       76.2
+    N=20         Proposed      0.018        0.000          0.240      117.0      100.0
+    N=24         Baseline      0.021        0.000          0.858     1008.0       75.3
+    N=24         Proposed      0.022        0.000          0.221      137.0      100.0
+
+  -- Proposed-controller runtime tail across pack sizes
+  ----------------------------------------------------------------------------
+    Proposed t_95 at N = 16 [ms]                                   96.0
+    Proposed t_95 at N = 24 [ms]                                  137.0
+
+  -- Baseline runtime tail across pack sizes (all near the 1 s limit)
+  ----------------------------------------------------------------------------
+    Baseline t_95 at N = 16 [ms]                                 1001.0
+    Baseline t_95 at N = 20 [ms]                                 1002.0
+    Baseline t_95 at N = 24 [ms]                                 1008.0
+
+==============================================================================
+  SECTION VI-B.4 -- SENSITIVITY TO PREDICTION HORIZON
+==============================================================================
+
+  In-text numbers (table rows are in Table VII above)
+  ----------------------------------------------------------------------------
+Section VI-B.4 -- Sensitivity to Prediction Horizon
+==============================================================================
+  source: C:\Users\skegro\Documents\C2_IEEE-TCST_Code_20260528\results\Results_robustness_sweeps_20260617.mat
+
+  -- Per-horizon metrics (N = 20, WLTC Med)
+  ----------------------------------------------------------------------------
+    Cond.        Ctrl.   e_bar [%]  Phi_curt[%]   sigma_SOC[%]   t_95[ms] eta_opt[%]
+    ------------------------------------------------------------------------------
+    Np=4         Baseline      0.017        0.000          1.388     1000.0       85.9
+    Np=4         Proposed      0.018        0.000          0.240       40.0      100.0
+    Np=6         Baseline      0.129        0.111          1.171     1001.0       84.3
+    Np=6         Proposed      0.018        0.000          0.240       61.0      100.0
+    Np=8         Baseline      0.129        0.222          0.983     1001.0       81.7
+    Np=8         Proposed      0.018        0.000          0.240       93.0      100.0
+    Np=10        Baseline      0.186        0.222          0.823     1002.0       76.2
+    Np=10        Proposed      0.018        0.000          0.240      117.0      100.0
+
+  -- Baseline computation-performance tradeoff over the horizon
+  ----------------------------------------------------------------------------
+    Baseline sigma_SOC_bar at N_p = 4  [%]                        1.388
+    Baseline sigma_SOC_bar at N_p = 10 [%]                        0.823
+    Baseline eta_opt at N_p = 4  [%]                               85.9
+    Baseline eta_opt at N_p = 10 [%]                               76.2
+    Baseline t_95 at N_p = 4 [ms]                                1000.0
+    Smallest N_p at which baseline curtailment appears                6
+
+  -- Proposed controller over the horizon
+  ----------------------------------------------------------------------------
+    Proposed t_95 at N_p = 4  [ms]                                 40.0
+    Proposed t_95 at N_p = 10 [ms]                                117.0
+    Proposed sigma_SOC_bar at N_p = 4  [%]                        0.240
+    Proposed sigma_SOC_bar at N_p = 10 [%]                        0.240
+    Proposed certifies every active step at every tested N_p        yes
+    Proposed shows no detected curtailment at any tested N_p        yes
+
+  -- Cross-horizon comparison quoted at the end of the subsection
+  ----------------------------------------------------------------------------
+    Proposed N_p=4 sigma_SOC_bar below baseline N_p=10              yes
+       Proposed N_p=4  sigma_SOC_bar [%]                          0.240
+       Baseline N_p=10 sigma_SOC_bar [%]                          0.823
+    t_95 ratio, Baseline N_p=4  / Proposed N_p=4 [x]               25.0
+    t_95 ratio, Baseline N_p=10 / Proposed N_p=4 [x]               25.1
+    Proposed eta_opt at N_p = 4 [%]                               100.0
+
+==============================================================================
+  SECTION VII -- CONCLUSION (headline numbers)
+==============================================================================
+
+  In-text numbers
+  ----------------------------------------------------------------------------
+Section VII -- Conclusion (headline numbers restated)
+==============================================================================
+  source: C:\Users\skegro\Documents\C2_IEEE-TCST_Code_20260528\results\Results_nominal_wltc_20260617.mat
+
+  -- Nominal 20-cell WLTC case
+  ----------------------------------------------------------------------------
+    Certified-optimality rate, baseline [%]                       77.61
+    Certified-optimality rate, proposed [%]                      100.00
+    t_95 reduction factor [x]                                       6.8
+    Cycle-mean sigma_SOC reduction factor [x]                       3.4
+    Proposed detected curtailment steps (claim: none)                 0
+
+  -- Same-state restriction gap, both trajectories
+  ----------------------------------------------------------------------------
+    Proposed-controller trajectory g_rel_bar [%]                  0.102
+    Rule-based-driver trajectory g_rel_bar [%]                    0.056
+    Larger of the two mean gaps [%]                               0.102
+
+==============================================================================
+  APPENDIX -- DETAILED MIXED-INTEGER CONVEX REFORMULATION
+==============================================================================
+
+  SOS2 curtailment-error check (analyze_SOS2_curtailment_error)
+  ----------------------------------------------------------------------------
+=== SOS2 fit: numerical max pointwise error (actual saved PWL) ===
+  PWL: 14 breakpoints over [44.80, 72.00] V
+  Max |r_PL(v) - 1/v|                   = 7.4017e-06 V^-1
+  Implied max lambda error (Var D peak)  = 3.2861e-03 A  (peak |p_req| = 444.0 W)
+  Curtailment threshold eps_lambda       = 1.0000e-02 A
+  Error / threshold                      = 0.3286
+
+  In-text numbers
+  ----------------------------------------------------------------------------
+Appendix -- SOS2 approximation of the inverse pack voltage
+==============================================================================
+  source: C:\Users\skegro\Documents\C2_IEEE-TCST_Code_20260528\results\Results_nominal_wltc_20260617.mat
+
+  -- Breakpoint grid
+  ----------------------------------------------------------------------------
+    Number of breakpoints N_v                                        14
+    Pack-voltage range low  [V]                                     44.80
+    Pack-voltage range high [V]                                     72.00
+    Smallest breakpoint spacing [V]                                  1.34
+    Largest  breakpoint spacing [V]                                  3.21
+
+  -- Approximation error
+  ----------------------------------------------------------------------------
+    Worst-case pointwise error eps_SOS2 [V^-1]                     7.4017e-06
+    Peak requested power |p_req| [W]                                444.0
+    Implied curtailment-error bound |dlambda| [A]                  3.2861e-03
+    Detection threshold eps_lambda [A]                             1.0000e-02
+    Bound / threshold [-]                                          0.3286
+
+==============================================================================
+  MANUSCRIPT FIGURES
+==============================================================================
+>>> [1/3] Fig. 2 -- Empirical CDF of per-step solver time (figure_solve_time_cdf)...
+>>> [2/3] Fig. 3 -- Requested power and baseline solve class (figure_power_solveclass)...
+>>> [3/3] Fig. 4 -- Cell engagement over the WLTC cycle (figure_engagement_heatmap)...
+
+==============================================================================
+Manuscript figures -- status summary
+==============================================================================
+  Fig. 2 -- Empirical CDF of per-step solver time      OK
+  Fig. 3 -- Requested power and baseline solve class   OK
+  Fig. 4 -- Cell engagement over the WLTC cycle        OK
+==============================================================================
+Output directory: results/Figures/
+
+==============================================================================
+  COMPONENT STATUS
+==============================================================================
+  report_table_evaluation_protocol         OK
+  report_table_robustness_case_params      OK
+  analyze_solver_certification             OK
+  analyze_samestate_gap                    OK
+  analyze_closedloop_perf                  OK
+  analyze_montecarlo_ics                   OK
+  analyze_robustness_sweeps                OK
+  analyze_SOS2_curtailment_error           OK
+  report_intext_numbers                    OK
+  generate_all_manuscript_figures          OK
+
+  All report blocks were produced.
+==============================================================================

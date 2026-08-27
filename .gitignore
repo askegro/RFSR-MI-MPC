@@ -1,0 +1,40 @@
+# ---- Large result files -------------------------------------------------
+# The simulation result .mat files total ~174 MB and one of them exceeds
+# GitHub's 100 MiB hard per-file limit. They are archived separately
+# (see README) and must be downloaded into results/ before running
+# REPRODUCE_ALL_RESULTS.
+results/*.mat
+
+# Deliberately still tracked, because they are small and they document the
+# reported results:
+#   results/Figures/*.pdf, results/Figures/*.eps
+#   results/textualOutputs/*.txt
+# Note: data/*.mat (cell data, WLTC drive cycle) are INPUTS and are tracked.
+
+# ---- Scratch ------------------------------------------------------------
+logs/
+
+# ---- MATLAB -------------------------------------------------------------
+*.asv
+*.m~
+*.autosave
+*.mex*
+slprj/
+sccprj/
+codegen/
+*.slxc
+octave-workspace
+
+# ---- Solver / licence leftovers -----------------------------------------
+gurobi.log
+*.lic
+*.lp
+*.mps
+
+# ---- OS / editor --------------------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp

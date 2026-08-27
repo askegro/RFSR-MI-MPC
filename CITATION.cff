@@ -1,0 +1,104 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite both the software and the associated paper."
+
+title: "RFSR-MI-MPC: Ranking-Based Feasible-Set Restriction for Reconfigurable Battery Packs"
+abstract: >-
+  Simulation and postprocessing code for ranking-based feasible-set
+  restriction (RFSR) applied to mixed-integer model predictive control of
+  reconfigurable battery packs, as reported in the associated manuscript.
+type: software
+license: MIT
+
+# TODO: replace with the repository URL once it is created.
+repository-code: "https://github.com/USERNAME/REPOSITORY"
+
+# TODO: expand the initials below to full given names, and add ORCID iDs.
+# CFF requires given-names; initials are accepted but full names are
+# preferred, and GitHub renders whatever is given here verbatim.
+authors:
+  - family-names: "Škegro"
+    given-names: "A."
+    # orcid: "https://orcid.org/0000-0000-0000-0000"
+    # affiliation: ""
+  - family-names: "Ouyang"
+    given-names: "Q."
+  - family-names: "Wik"
+    given-names: "T."
+  - family-names: "Zou"
+    given-names: "C."
+
+keywords:
+  - model predictive control
+  - mixed-integer programming
+  - reconfigurable battery pack
+  - battery management system
+  - real-time control
+
+# =========================================================================
+# DOI 1 of 3 -- THIS SOFTWARE
+# =========================================================================
+# Top-level "identifiers" means identifiers OF THE WORK THIS FILE DESCRIBES,
+# i.e. the code. Put the DOI that the GitHub-Zenodo integration mints when
+# you create a GitHub release here -- NOT the data DOI.
+#
+# Zenodo mints two DOIs for a GitHub archive: one per release, and one
+# "concept" DOI that always resolves to the newest release. Use the concept
+# DOI, so this file does not go stale on every release.
+#
+# Nothing to fill in yet: this DOI does not exist until your first release.
+# Uncomment the three lines below once it does.
+#
+# identifiers:
+#   - type: doi
+#     value: "10.5281/zenodo.0000000"
+#     description: "Archived snapshot of this repository (all versions)"
+
+# =========================================================================
+# DOI 2 of 3 -- THE RESULT DATA  <-- the one you are reserving now
+# =========================================================================
+# The Zenodo record holding the .mat result files that fetch_results.m
+# downloads. That record is a SEPARATE WORK from this code, so it belongs
+# under "references", not under "identifiers".
+#
+references:
+  - type: data
+    title: >-
+      Simulation results for RFSR-MI-MPC: Ranking-Based Feasible-Set
+      Restriction for Real-Time Control of Reconfigurable Battery Packs
+    authors:
+      - family-names: "Škegro"
+        given-names: "A."
+      - family-names: "Ouyang"
+        given-names: "Q."
+      - family-names: "Wik"
+        given-names: "T."
+      - family-names: "Zou"
+        given-names: "C."
+    doi: "10.5281/zenodo.22134357"
+    year: 2026
+
+# =========================================================================
+# DOI 3 of 3 -- THE PAPER
+# =========================================================================
+# Goes inside preferred-citation below, as a "doi:" line. It does not exist
+# until the paper is published, so it stays commented until then.
+preferred-citation:
+  type: article
+  title: >-
+    RFSR-MI-MPC: Ranking-Based Feasible-Set Restriction for Real-Time Control
+    of Reconfigurable Battery Packs
+  authors:
+    - family-names: "Škegro"
+      given-names: "A."
+    - family-names: "Ouyang"
+      given-names: "Q."
+    - family-names: "Wik"
+      given-names: "T."
+    - family-names: "Zou"
+      given-names: "C."
+  journal: "IEEE Transactions on Control Systems Technology"
+  status: submitted
+  year: 2026
+  # doi: "10.1109/TCST.0000.0000000"
+  # TODO on acceptance: change status to in-press. On publication: delete the
+  # status line entirely, uncomment doi, and add volume, issue, start, end.
