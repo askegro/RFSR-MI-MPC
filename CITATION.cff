@@ -43,13 +43,10 @@ keywords:
 # "concept" DOI that always resolves to the newest release. Use the concept
 # DOI, so this file does not go stale on every release.
 #
-# Nothing to fill in yet: this DOI does not exist until your first release.
-# Uncomment the three lines below once it does.
-#
-# identifiers:
-#   - type: doi
-#     value: "10.5281/zenodo.0000000"
-#     description: "Archived snapshot of this repository (all versions)"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.22136252"
+    description: "Archived snapshot of this repository (all versions)"
 
 # =========================================================================
 # DOI 2 of 3 -- THE RESULT DATA  <-- the one you are reserving now
