@@ -9,8 +9,7 @@ abstract: >-
 type: software
 license: MIT
 
-# TODO: replace with the repository URL once it is created.
-repository-code: "https://github.com/USERNAME/REPOSITORY"
+repository-code: "https://github.com/askegro/RFSR-MI-MPC"
 
 # TODO: expand the initials below to full given names, and add ORCID iDs.
 # CFF requires given-names; initials are accepted but full names are
