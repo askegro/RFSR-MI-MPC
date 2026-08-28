@@ -1,0 +1,11 @@
+# Line-ending policy for this repository.
+#
+# text=auto: git stores text files with LF in the repository and checks them
+# out with the platform's native endings (CRLF on Windows, LF elsewhere).
+# This keeps diffs clean regardless of each contributor's git configuration,
+# and fixes files that currently carry mixed CRLF/LF endings.
+* text=auto
+
+# Binary assets: never convert line endings, never attempt a text diff.
+*.mat binary
+*.pdf binary

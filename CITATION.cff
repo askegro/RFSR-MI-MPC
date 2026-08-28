@@ -11,20 +11,19 @@ license: MIT
 
 repository-code: "https://github.com/askegro/RFSR-MI-MPC"
 
-# TODO: expand the initials below to full given names, and add ORCID iDs.
-# CFF requires given-names; initials are accepted but full names are
-# preferred, and GitHub renders whatever is given here verbatim.
 authors:
   - family-names: "Škegro"
-    given-names: "A."
-    # orcid: "https://orcid.org/0000-0000-0000-0000"
-    # affiliation: ""
+    given-names: "Albert"
+    orcid: "https://orcid.org/0000-0003-3819-2215"
   - family-names: "Ouyang"
-    given-names: "Q."
+    given-names: "Quan"
+    orcid: "https://orcid.org/0000-0002-4381-4763"
   - family-names: "Wik"
-    given-names: "T."
+    given-names: "Torsten"
+    orcid: "https://orcid.org/0000-0002-5234-8426"
   - family-names: "Zou"
-    given-names: "C."
+    given-names: "Changfu"
+    orcid: "https://orcid.org/0000-0001-7119-6854"
 
 keywords:
   - model predictive control
@@ -66,13 +65,13 @@ references:
       Restriction for Real-Time Control of Reconfigurable Battery Packs
     authors:
       - family-names: "Škegro"
-        given-names: "A."
+        given-names: "Albert"
       - family-names: "Ouyang"
-        given-names: "Q."
+        given-names: "Quan"
       - family-names: "Wik"
-        given-names: "T."
+        given-names: "Torsten"
       - family-names: "Zou"
-        given-names: "C."
+        given-names: "Changfu"
     doi: "10.5281/zenodo.22134357"
     year: 2026
 
@@ -88,13 +87,13 @@ preferred-citation:
     of Reconfigurable Battery Packs
   authors:
     - family-names: "Škegro"
-      given-names: "A."
+      given-names: "Albert"
     - family-names: "Ouyang"
-      given-names: "Q."
+      given-names: "Quan"
     - family-names: "Wik"
-      given-names: "T."
+      given-names: "Torsten"
     - family-names: "Zou"
-      given-names: "C."
+      given-names: "Changfu"
   journal: "IEEE Transactions on Control Systems Technology"
   status: submitted
   year: 2026
